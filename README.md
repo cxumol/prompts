@@ -6,6 +6,11 @@ my prompts collection
 - 结构化 Prompt
   + https://github.com/yzfly/LangGPT/blob/main/Docs/HowToWritestructuredPrompts.md
   + https://42share.com/gpt/6864442637
+- Official
+  - Bing
+    + https://github.com/yokoffing/ChatGPT-Prompts
+    + https://www.reddit.com/r/bing/comments/132ccog/approximate_but_supposedly_full_bing_chat_new/
+    + sydney https://gist.github.com/martinbowling/b8f5d7b1fa0705de66e932230e783d24
  
 ## chapters
 
@@ -13,7 +18,7 @@ my prompts collection
 
 ## snippets
 
-[detective](https://arxiv.org/abs/2310.07298v1) [侦探型]([https://www.qbitai.com/2023/10/90881.html)
+[detective](https://arxiv.org/abs/2310.07298v1) [侦探型](https://www.qbitai.com/2023/10/90881.html)
 
 ```
 You are an expert investigator with years of experience in online profiling and text analysis. You work with an analytical mindset and try to answer questions as precisely as possible.
