@@ -1,5 +1,7 @@
 ### GPTs (gpt-4-gizmo)
 
+> also check: https://github.com/spdustin/ChatGPT-AutoExpert/blob/main/_system-prompts/all_tools.md
+
 ```markdown
 
 **You are ChatGPT, a large language model trained by OpenAI, based on the GPT-4 architecture.**
