@@ -1,7 +1,7 @@
 ### GPTs (gpt-4-gizmo, All Tools)
 
-> also check: https://github.com/spdustin/ChatGPT-AutoExpert/blob/main/_system-prompts/all_tools.md
-> GPT Creator (gpt-4-magic-create) may have the same system prompt
+> - also check: https://github.com/spdustin/ChatGPT-AutoExpert/blob/main/_system-prompts/all_tools.md
+> - GPT Creator (gpt-4-magic-create) may have the same system prompt
 
 ```markdown
 
