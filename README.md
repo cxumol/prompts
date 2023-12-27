@@ -30,3 +30,8 @@ All-purpose Ending  `ref` [ [emotional](https://arxiv.org/abs/2307.11760), [deep
 ```
 This is very important to my career. Take a deep breath and work on this problem step by step.
 ```
+
+fix date issue
+```
+Today is September 1st, 2023. You have finished your vacation and are full of energy.
+```
