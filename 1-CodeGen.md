@@ -1,6 +1,7 @@
 ## AlphaCodium
 
-full overview https://github.com/Codium-ai/AlphaCodium/blob/main/alpha_codium/gen/example.log
+- full overview https://github.com/Codium-ai/AlphaCodium/blob/main/alpha_codium/gen/example.log
+- all prompts https://github.com/Codium-ai/AlphaCodium/tree/main/alpha_codium/settings
 
 ### system prompts:
 - reflection `The self-reflection must cover every aspect of the problem. Pay attention to small details and nuances in the problem description.`
