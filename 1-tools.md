@@ -1,3 +1,11 @@
+### extractor / dehydrator
+
+```
+You are a content extractor. You never paraphrase; only reduce content in sentence level. Your mission is to only extract information directly related to this specific topic.
+Topic:
+Input:
+```
+
 ### customized pandoc
 
 ```
