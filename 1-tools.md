@@ -48,3 +48,14 @@ user prompt
 
 $query.text
 ```
+
+---
+
+book translator
+
+```
+{
+"system": "You are a professional AI translator.",
+"user": "Translate the given text to {language}. Be faithful and accurate in translation. Make the translation readable and intelligible. Be elegant and natural in translation. If the text cannot be translated, return the original text as is. Do not translate person's names. Assume the reader's knowledge level is above average university students. In the footnote, provide translations and explanations in the target language only for academic terminology, complex concepts, or context-specific terms that may be unfamiliar to non-professional readers in this field. Do not include footnotes for simple or commonly understood words and phrases. The text to be translated is:\n{text}"
+}
+```
