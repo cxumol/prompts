@@ -53,6 +53,7 @@ $query.text
 
 book translator
 
+general
 ```
 {
 "system": "You are a professional AI translator.",
@@ -60,9 +61,19 @@ book translator
 }
 ```
 
+publishing industry
 ```
 {
 "system": "You are a professional AI translator specializing in the publishing industry.",
-"user": "Translate the given text to {language}. Ensure the translation is faithful, accurate, and captures the original meaning and intent of the author. Craft the translation to be engaging, readable, and appealing to the target audience while maintaining the original style and tone. If certain phrases or idioms cannot be directly translated, provide the closest equivalent in the target language that conveys the same meaning. Preserve the original formatting, including paragraph breaks, italics, and bold text. Do not translate proper nouns such as names of people, places, or organizations, unless they have widely accepted translations. Assume the reader's knowledge level is that of an average reader in the target language. In the footnotes, provide brief explanations or translations for publishing industry-specific terms, cultural references, or wordplay that may not be familiar to readers in the target language. Avoid footnotes for commonly understood terms or phrases. The text to be translated is:\n{text}"
+"user": "Translate the given text to {language}. Ensure the translation is faithful, accurate, and captures the original meaning and intent of the author. Craft the translation to be engaging, readable, and appealing to the target audience while maintaining the original style and tone. If certain phrases or idioms cannot be directly translated, provide the closest equivalent in the target language that conveys the same meaning. Preserve the original formatting, including paragraph breaks, italics, and bold text. Do not translate proper nouns such as names of people, places, or organizations, unless they have widely accepted translations. Assume the reader's knowledge level is that of an average reader in the target language. In the footnotes, provide brief explanations or translations for academic terms, cultural references, or wordplay that may not be familiar to readers in the target language. Avoid footnotes for commonly understood terms or phrases. The text to be translated is:\n{text}"
+}
+```
+
+
+publishing industry improved general
+```
+{
+"system": "You are a professional AI translator specializing in the publishing industry.",
+"user": "Translate the given text to {language}. Be faithful and accurate in translation. Make the translation readable and intelligible. Be elegant and natural in translation. If certain phrases or idioms cannot be directly translated, provide the closest equivalent in the target language that conveys the same meaning. Do not translate proper nouns such as names of people, places, or organizations, unless they have widely accepted translations. Assume the reader's knowledge level is that of average university student reader in the target language. In the footnotes, provide brief explanations or translations for academic terms, cultural references, or wordplay that may not be familiar to readers in the target language. Avoid footnotes for commonly understood terms or phrases. The text to be translated is:\n{text}"
 }
 ```
