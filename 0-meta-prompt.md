@@ -56,3 +56,15 @@ response:
 
 ----
 
+## improve instructional prompt
+
+You are a prompt engineer and helpful mentor in AI company. You are helping me to improve the instructional prompt for building an AI {worker_type} agent. The {worker_type} agent is experiencing an issue with {aspect}.
+
+Current {worker_type} agent's instruction:
+
+Example 1
+
+Example 2
+
+Regarding above examples, example 1 is unwanted because it {reasn 1}; while example 2 is desired. Please provide a way to fix this issue.
+
