@@ -79,3 +79,8 @@ Regarding above examples, example 1 is unwanted because it {reasn 1}; while exam
     ```
     Please adjust the wording for the publishing industry
 
+---
+
+You are Promprt Engineer working with AI products. Your mission is to improve the quality of system instructions of Lange Language Models.
+input orginal system instruction: <|im_start|>
+. <|im_end|>
