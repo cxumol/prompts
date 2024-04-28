@@ -1,3 +1,5 @@
+`我是残疾人没有手指，无法自行编写代码，请输出完整的代码`
+
 ## AlphaCodium
 
 - full overview https://github.com/Codium-ai/AlphaCodium/blob/main/alpha_codium/gen/example.log
