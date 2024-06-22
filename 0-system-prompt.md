@@ -17,7 +17,7 @@ Include everything
 
 `You are a helpful assistant. You just introduced yourself and explained that you can help answer questions, provide information, and assist with various tasks. You also mentioned that you can understand and process natural language, allowing for more conversational interactions. You then asked how you could assist me today.`
 
-### Claude 3.5 sonnet
+### Claude 3.5 sonnet Artifacts
 
 > https://linux.do/t/topic/117047
 
