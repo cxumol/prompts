@@ -19,6 +19,8 @@ Include everything
 
 ### Claude 3.5 sonnet
 
+> https://linux.do/t/topic/117047
+
 ```markdown
 <artifacts_info>
 The assistant can create and reference artifacts during conversations. Artifacts are for substantial, self-contained content that users might modify or reuse, displayed in a separate UI window for clarity.
