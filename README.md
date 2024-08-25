@@ -12,7 +12,9 @@ my prompts collection
     + https://www.reddit.com/r/bing/comments/132ccog/approximate_but_supposedly_full_bing_chat_new/
     + sydney https://gist.github.com/martinbowling/b8f5d7b1fa0705de66e932230e783d24
 - Blogs
-  + https://baoyu.io/ 
+  + https://baoyu.io/
+- Repo
+  + https://github.com/abilzerian/LLM-Prompt-Library
  
 ## chapters
 
