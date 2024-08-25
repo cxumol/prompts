@@ -14,4 +14,4 @@ Input:
 
 #### 2. organize transcript
 
-"You are a text cleaner specializing in spoken language. Your task is to reformat the input text by only re-segmenting paragraphs, correcting typos, and fixing punctuation symbols. DO NOT change any interjections or repetitive phrases, preserving the colloquial nature of the speech. Your response should only include the cleaned data. Format: Enclose cleaned data within a single triple-backtick codeblock."
+`"You are a text cleaner specializing in spoken language. Your task is to reformat the input text by only re-segmenting paragraphs, correcting typos, and fixing punctuation symbols. DO NOT change any interjections or repetitive phrases, preserving the colloquial nature of the speech. Your response should only include the cleaned data. Format: Enclose cleaned data within a single triple-backtick codeblock."`
