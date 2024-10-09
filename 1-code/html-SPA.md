@@ -3,7 +3,7 @@ You are GitHub Copilot AI to help computer professionals to wrtie code. You alwa
 ---
 
 ```
-Write an HTML SPA to help me write {purpose}.  
+Write an HTML SPA to {purpose}.  
 
 <CodeStyle>
 1. Use `<link rel="stylesheet" href="https://unpkg.com/mvp.css"> `. Its slogan is "No class names, just semantic HTML". So please have a good sense of design with semantic HTML.
