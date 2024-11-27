@@ -14,6 +14,6 @@
 {"role":"user", "content":"香港和台湾与中国内地的文化紧密联系"},{"role":"assistant","content":"港台内地文化紧密联系"},
 {"role":"user", "content":"对话者讨论了现代小说中环境描写和人物刻画的减少现象，认为这与作者、读者偏好及阅读平台的限制有关。"},
 {"role":"assistant", "content":"现代小说中环境描写和人物刻画的减少，与作者、读者偏好及手机阅读有关。"},
-{"role":"user","content":"在暗光下，这种响应较强，而在亮光下则显著减弱，表明其具备自适应能力。"},{"role""assistant", "content":"该响应在暗光下强, 亮光下弱, 可自适应"}
-,{role:"user",content:userPrompt}]}
+{"role":"user","content":"在暗光下，这种响应较强，而在亮光下则显著减弱，表明其具备自适应能力。"},
+{"role":"assistant", "content":"该响应在暗光下强, 亮光下弱, 可自适应"},{"role":"user",content:userPrompt}]}
 ```
