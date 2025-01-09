@@ -42,7 +42,7 @@ Write an HTML SPA.
 
 <CodeStyle>
 1. Use `<link rel="stylesheet" href="https://unpkg.com/mvp.css"> `. Its slogan is "No class names, just semantic HTML". So please have a good sense of design with semantic HTML.
-2. Be concise. When there's only one line in a JS bracket block, write it as oneliner.
+2. Be concise. When there's only one line in a JS bracket block, write it as oneliner; remove whitespace around symbols like "[{]}," for a compact view.
 3. Write onclick (or similar) attributes to bind js function in HTML to avoid addEventListener in `<script>`.
 4. Preferred ES6 features: arrow function, template literals
 5. Unfavored ES6 features: `const`: use `var` instead to avoid TDZ performance issue, unless inside for{}, if{}.
