@@ -73,7 +73,7 @@ Write an HTML SPA.
   <script>
     var eid=id=>document.getElementById(id);
     var inputArea=eid('inputArea'), outputArea=eid('outputArea'), copyBtn=eid('copyBtn');
-    var copyResult=()=> navigator.clipboard.writeText(outputArea.value);
+    var copyOutput=()=> navigator.clipboard.writeText(outputArea.value);
     var dropHandler=ev=>{ ev.preventDefault(); inputArea.value = ev.dataTransfer.files[0].name; }
     var dragOverHandler=ev=>ev.preventDefault();
   </script>
