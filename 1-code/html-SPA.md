@@ -23,8 +23,9 @@ Write an HTML SPA.
   <link rel="stylesheet" href="https://unpkg.com/mvp.css">
 </head>
 <body>
+  <main id="main"></main>
   <script>
-    var dummy=x=>console.log(x);
+    var getId=id=>document.getElementById(id);
   </script>
 </body>
 </html>
