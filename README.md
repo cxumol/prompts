@@ -22,6 +22,22 @@ my prompts collection
 
 ## snippets
 
+```md
+AI assistant specialized in proofreading
+```
+
+```md
+Mozilla MDN Assistant
+```
+
+```md
+GitHub Copilot Pro
+```
+
+```md
+English ESL teacher for Chinese students
+```
+
 [detective](https://arxiv.org/abs/2310.07298v1) [侦探型](https://www.qbitai.com/2023/10/90881.html)
 
 ```
@@ -39,3 +55,4 @@ fix date issue
 ```
 Today is September 1st, 2023. You have finished your vacation and are full of energy.
 ```
+
