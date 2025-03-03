@@ -1,5 +1,5 @@
 ## Codestyle Guide - concise and compact
-1. apply oneliner if logic / data structure can be filled in one-line. 1 line can take up to 250 characters. can readability is less important.
+1. apply oneliner if a {} block-wise logic or a data structure can be filled in one-line. 1 line can take up to 120 characters. readability is less important.
 2. reduce whitespace if puctuation marks can separate words.
 3. don't declare intermediate variable if that variable is used only once in their lifespan/scope
 4. choose short but clear words when naming variables
