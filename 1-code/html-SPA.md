@@ -85,3 +85,11 @@ Write an HTML SPA.
 
 </Demand>
 ```
+
+---
+
+#### To change, modify, tune, add feature etc
+
+```
+requirements: DO NOT change code style. Keep where one-liner one-liner; keep compact and concise.
+```
