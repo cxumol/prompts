@@ -50,10 +50,10 @@ Write an HTML SPA.
 6. You may define help functions like `var eid=id=>document.getElementById(id);` for a small code size, if document.getElementById is used for multiple times.
 </CodeStyle>
 
-<StartFrom>
+<Template>
 <!DOCTYPE html><html lang="en"><head>
   <meta name="viewport" content="width=device-width, initial-scale=1" /><meta charset="utf-8" />
-  <title>SPA Template</title>
+  <title>HTML SPA Template</title>
   <link rel="stylesheet" href="https://unpkg.com/mvp.css">
   <style>
     main { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; }
@@ -77,7 +77,7 @@ Write an HTML SPA.
     var dragOverHandler=ev=>ev.preventDefault();
   </script>
 </body></html>
-</StartFrom>
+</Template>
 
 <Demand>
 
