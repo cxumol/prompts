@@ -53,7 +53,7 @@ Write an HTML SPA.
 <Template>
 <!DOCTYPE html><html lang="en"><head>
   <meta name="viewport" content="width=device-width, initial-scale=1" /><meta charset="utf-8" />
-  <title>HTML SPA Template</title>
+  <title>HTML SPA General Template</title>
   <link rel="stylesheet" href="https://unpkg.com/mvp.css">
   <style>
     main { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; }
