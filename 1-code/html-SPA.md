@@ -53,7 +53,7 @@ Write an HTML SPA.
 <StartFrom>
 <!DOCTYPE html><html lang="en"><head>
   <meta name="viewport" content="width=device-width, initial-scale=1" /><meta charset="utf-8" />
-  <title>Example</title>
+  <title>SPA Template</title>
   <link rel="stylesheet" href="https://unpkg.com/mvp.css">
   <style>
     main { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; }
@@ -66,14 +66,14 @@ Write an HTML SPA.
 <main>
   <textarea id="inputArea" placeholder="Input"></textarea>
   <div class="buttons">
-      <button id="goBtn" onclick="main()">Go</button>
+      <button id="goBtn" onclick="main(this)">Go</button>
       <button id="copyBtn" onclick="copyOutput()" disabled>Copy Output</button>
   </div>
   <textarea id="outputArea" placeholder="Output" readonly></textarea>
 </main>
   <script>
-    var eid=id=>document.getElementById(id);
-    var inputArea=eid('inputArea'), outputArea=eid('outputArea'), copyBtn=eid('copyBtn');
+    var $=id=>document.getElementById(id), $$=s=>document.querySelectorAll(s);
+    var inputArea=$('inputArea'), outputArea=$('outputArea'), copyBtn=$('copyBtn');
     var copyOutput=()=> navigator.clipboard.writeText(outputArea.value);
     var dropHandler=ev=>{ ev.preventDefault(); inputArea.value = ev.dataTransfer.files[0].name; }
     var dragOverHandler=ev=>ev.preventDefault();
