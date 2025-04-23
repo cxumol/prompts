@@ -59,8 +59,6 @@ Write an HTML SPA.
     main { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; }
     .buttons { display: flex; flex-direction: column; align-items: center; justify-content: center;}
     textarea { height: 300px; resize: vertical; }
-    #copyButton { background-color: #ccc; } /* Initial gray color */
-    #copyButton.active { background-color: #4CAF50; color: white; }  /* Green when active */
   </style>
 </head><body>
 <main>
