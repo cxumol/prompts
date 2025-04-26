@@ -47,7 +47,7 @@ Write an HTML SPA.
 3. Write onclick (or similar) attributes to bind js function in HTML to avoid addEventListener in `<script>`.
 4. Preferred ES6 features: arrow function, template literals
 5. Unfavored ES6 features: `const`: use `var` instead to avoid TDZ performance issue, unless inside for{}, if{}.
-6. You may define help functions like `var eid=id=>document.getElementById(id);` for a small code size, if document.getElementById is used for multiple times.
+6. You may define help functions like `var $=id=>document.getElementById(id);` for a small code size, if document.getElementById is used for multiple times.
 </CodeStyle>
 
 <Template>
