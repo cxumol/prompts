@@ -27,6 +27,7 @@ Write an HTML SPA.
   <script>
     var $=id=>document.getElementById(id);
   </script>
+  <script src="https://dohliam.github.io/dropin-minimal-css/switcher.js" type="text/javascript"></script>
 </body>
 </html>
 </StartFrom>
