@@ -34,7 +34,15 @@ Write an HTML SPA.
   <textarea id="outputArea" placeholder="Output" readonly></textarea>
 </main>
   <script>
-    var $=id=>document.getElementById(id), $$=s=>document.querySelectorAll(s);
+    // utils
+    var ebus={events:{},on(s,t){this.events[s]||(this.events[s]=[]),this.events[s].push(t)},emit(s,t){this.events[s]&&this.events[s].forEach(i=>i(t))},off(s,t){this.events[s]&&(this.events[s]=this.events[s].filter(i=>i!==t))}}; //ebus.on('dataLoaded', (data) => console.log('Data loaded:', data)); ebus.emit('dataLoaded',{k:'v'});
+    var $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
+    var newElm=(tag, p)=>Object.assign(document.createElement(tag), p), css=(e, sty)=>Object.assign(e.style, sty);
+    var on=(p,ev,sel,cb)=>{p.addEventListener(ev,e=>{if(e.target.closest(sel))cb(e,e.target.closest(sel))})}, onAll=(el, ev, cb)=>el.forEach(e => e.addEventListener(ev,cb));//for simple case, use <a onclick="" />
+    var get=url=>fetch(url).then(r=>r.json()), post=(url,d)=>fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).then(r=>r.json());
+    var debounce=(f,d)=>{let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>f(...a),d)}}, throttle=(f,d)=>{let t=false;return(...a)=>{if(t)return;t=true;f(...a);setTimeout(()=>t=false,d)}}, store=(k,v)=>v===undefined?JSON.parse(localStorage.getItem(k)):localStorage.setItem(k,JSON.stringify(v));
+    var log = console.log;
+
     var inputArea=$('inputArea'), outputArea=$('outputArea'), copyBtn=$('copyBtn');
     var copyOutput=()=> navigator.clipboard.writeText(outputArea.value);
     var dropHandler=ev=>{ ev.preventDefault(); inputArea.value = ev.dataTransfer.files[0].name; }
