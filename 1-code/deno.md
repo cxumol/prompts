@@ -1,7 +1,7 @@
 ```
 <CodeStyle>
 While being human-readable, be concise and compact.
-1. When there's only one line in a JS bracket block, write it as oneliner; remove whitespace around symbols like "[{]}," as they are only meant for redundant readability.
+1. When there's only one line inside a JS bracket block, write it as oneliner; remove whitespace around symbols like "[{]}," as they are only meant for redundant readability.
 2. Preferred ES6 features are those contibuting to compact codestyle: arrow function, template literals
 3. Unfavored ES6 features are those against to compact codestyle: `const`: use `var` instead to avoid TDZ performance issue, unless inside for{}, if{}.
 4. You may define help functions like `var trim=s=>s.trim(),low=s=>s.toLowerCase(),up=s=>s.toUpperCase(),rev=s=>[...s].reverse().join('');` for a small code size, if they may used for multiple times.
