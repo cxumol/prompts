@@ -23,7 +23,7 @@ pass2.py to concat videos:
 - output format R:/{getcwd().split("/")[-1]}_{sub_range}_{vid_spec}.mp4
 - ffprobe to get duration and vid_spec WxHxFPS_vcodec_acodec, like 1920x1080x30_h264_aac
 - duration is used for limit GREED_MAX_DURATION=12*3600 #12h
-- sub_range represents positional ralations from the sorted global List[ID] index. Ideally it's a continuous full range "{firstID}-{endID}", however in realworld cases, some clips may be in different vid_spec and thus creates discrete clips in a vid_spec group; dash to join consecutive indices,and comma to join the rest. ID is treated as string/labels regardless of format, example1: 1.1-5.6; example2: 0,1.2-2.13,2.15,3.7-98
+- sub_range represents positional ralations from the sorted global List[ID] index. Ideally it's a continuous full range "{firstID}-{endID}", however in realworld cases, some clips may be in different vid_spec and thus creates discrete clips in a vid_spec group; dash to join consecutive indices,and comma to join the rest. ID is treated as string/labels regardless of format, example1: 1.1-5.6; example2: 0,1.2-2.13,2.15,10.7-98
 - first try to use intermediate.ts file and concat protocol, use R:/ts/ as temp dir, and R:/ for final outputs, clean temp .ts after each concat
 - if concat protocol failed, fallback to contact demuxer
 - avoid transcode unless specified
