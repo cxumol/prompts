@@ -7,14 +7,13 @@
 
 
 task is to create py scripts that follow instructions.
-always specify encoding='utf-8' whereever possible.
 For scripts by steps, don't create the next step script until user confirm current script 
 
 pass1.py to mv all videos from ./**/*.mp4 to ./flatten_vid/*
 - according to structure of dirs, assign or extract numerical ID (as i/i.j./i.j.k) from folder and filename
 - numerical ID can be extracted with regex pattern, or converted from chinese numbers with a mapping dict
 - if numerical ID cannot extarcted from filename/foldername, hardcode a mapping dict based on semantic ord
-- also create a "sorted_ID_index.json" as List[str,...] for pass2 use, sort by ID order
+- also create a "sorted_ID_list.json" as List[str,...] for pass2 use, sort by ID order
 - Don't behave like a fool, you are not creating a script for general purpose. Your code should be specialized on this specific dir.
 - pass1 result example: i.title.mp4 or i.j.title.mp4 or i.j.k.title.mp4
 - user can append --revert to regret
@@ -23,21 +22,20 @@ pass1.py to mv all videos from ./**/*.mp4 to ./flatten_vid/*
 pass2.py to concat videos:
 - output format R:/{getcwd().split("/")[-1]}_{sub_range}_{vid_spec}.mp4
 - ffprobe to get duration and vid_spec WxHxFPS_vcodec_acodec, like 1920x1080x30_h264_aac
-- duration is used for limit GREED_MAX_DURATION=12*3600 #12h
-- sub_range represents positional ralations from the sorted global List[ID] index. Ideally it's a continuous full range "{firstID}-{endID}", however in realworld cases, some clips may be in different vid_spec and thus creates discrete clips in a vid_spec group; dash to join consecutive indices,and comma to join the rest. ID is treated as string/labels regardless of format, example1: 1.1-5.6; example2: 0,1.2-2.13,2.15,10.7-98
+- duration is used for limit GREED_MAX_DURATION=12*3600 #12h, the next clip is allocated to next batch
+- sub_range represents positional ralations from the sorted global List[ID]. Ideally it's a continuous full range "{veryfirstID}-{veryendID}", however in realworld cases, some clips may be in different vid_spec and thus creates gaps in a vid_spec group; dash to join consecutive indices,and comma to join the rest. ID is treated as string/labels, and only its position matters to construct sub_range, example1: 1.1-5.6; example2: 0,1.2-2.13,2.15,10.7-98
 - first try to use intermediate.ts file and concat protocol, use R:/ts/ as temp dir, and R:/ for final outputs, clean temp .ts after each concat
 - if concat protocol failed, fallback to contact demuxer
 - avoid transcode unless specified
 - create R:/{vid_output_basename}_timeline.txt
 - in timelie.txt, each line format as HH:MM:SS ID.title (with removed strings of watermark/ads if there's is)
-- if there's higher level title, use higher level title as sep line
+- if folder name represents higher level title, include higher level title as sep line
 For example:
 ```txt
-=== 第十二卷：兽类 - 乘黄 ===
-0:00:00 - 15.2.1.章与节
-0:43:03 - 15.3.2.捕食与被捕食
-1:11:14 - 15.4.3.首领与随从
-=== 第十三卷：奇观 - 扶桑 ===
+=== 第十二卷：兽类 ===
+0:00:00 - 15.2.1.捕食与被捕食
+0:43:03 - 15.3.2.首领与随从
+=== 第十三卷：奇观 ===
 2:00:52 - 16.3.2.疆域划分
 2:55:40 - 16.4.3.神木枯荣
 3:28:51 - 16.5.4.沟渠流向
