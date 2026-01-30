@@ -21,7 +21,20 @@ pass2.py to concat videos:
 - first try to use intermediate.ts file and concat protocol, use R:/ts/ as temp dir, and R:/ for final outputs, clean temp .ts after each concat
 - if concat protocol failed, fallback to contact remuxer
 - avoid transcode unless specified
-- create R:/{vid_output_basename}_timeline.txt, with remove strings of watermark/ads
+- create R:/{vid_output_basename}_timeline.txt
+- in timelie.txt, each line format as HH:MM:SS ID.title (with removed strings of watermark/ads if there's is)
+- if there's higher level title, use higher level title as sep line
+For example:
+```txt
+=== 第十二卷：兽类 - 乘黄 ===
+0:00:00 - 15.2.1.章与节
+0:43:03 - 15.3.2.捕食与被捕食
+1:11:14 - 15.4.3.首领与随从
+=== 第十三卷：奇观 - 扶桑 ===
+2:00:52 - 16.3.2.疆域划分
+2:55:40 - 16.4.3.神木枯荣
+3:28:51 - 16.5.4.沟渠流向
+```
 
 
 ffmpeg, ffprobe, python are ready to call. 
