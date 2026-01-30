@@ -6,18 +6,23 @@
 - 精简高效，仅做针对性实现
 
 
+task is to create py scripts that follow instructions.
+For scripts by steps, don't create the next step script until user confirm current script 
+
 pass1.py to mv all videos from ./**/*.mp4 to ./flatten_vid/*
-- depending on structure of dirs, assign or extract order number (ID as i/i.j./i.j.k) from folder and filename
-- create sort algo smartly to mv files
+- according to structure of dirs, assign or extract numerical ID (as i/i.j./i.j.k) from folder and filename
+- numerical ID can be extracted with regex pattern, or converted from chinese numbers with a mapping dict
+- if numerical ID cannot extarcted from filename/foldername, hardcode a mapping dict based on semantic ord
+- Don't behave like a fool, you are not creating a script for general purpose. Your code should be specialized on this specific dir.
 - pass1 result example: i.title.mp4 or i.j.title.mp4 or i.j.k.title.mp4
 - user can append --revert to regret
 - first preview mv results, and run mv only if input Y/y
 
 pass2.py to concat videos:
 - output format R:/{getcwd().split("/")[-1]}_{sub_range}_{vid_spec}.mp4
-- sub_range is separated by commas for discrete and dash for continious, like: 1,5,6,8-10
-- sub_range in terms of multi-level ID, use a global List[Tuple(2|3)] as index, and find slices (like substring) to determine discrete/continious
-- ffprobe to get vid_spec WxHxFPS_vcodec_acodec, like 1920x1080x30_h264_aac
+- sub_range selects slices from semantically sorted global List[ID] index. Continuous = consecutive indices (dash), discrete = gaps (comma). ID structure is opaque - treat as string/labels regardless of format (1.1, Lecture1, or 开篇语), example1: 1.1-5.6; example2: 开篇,1.2-2.3,2.5,2.7-尾声
+- ffprobe to get duration and vid_spec WxHxFPS_vcodec_acodec, like 1920x1080x30_h264_aac
+- duration is used for limit GREED_MAX_DURATION=12*3600 #12h
 - first try to use intermediate.ts file and concat protocol, use R:/ts/ as temp dir, and R:/ for final outputs, clean temp .ts after each concat
 - if concat protocol failed, fallback to contact remuxer
 - avoid transcode unless specified
