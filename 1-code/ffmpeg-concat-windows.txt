@@ -7,6 +7,7 @@
 
 
 task is to create py scripts that follow instructions.
+always specify encoding='utf-8' whereever possible.
 For scripts by steps, don't create the next step script until user confirm current script 
 
 pass1.py to mv all videos from ./**/*.mp4 to ./flatten_vid/*
