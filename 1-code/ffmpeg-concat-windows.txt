@@ -1,0 +1,212 @@
+## 代码哲学
+
+避免 AI slop，写人类会写的代码：
+- 不加多余注释，保持文件风格一致
+- 不加异常的防御性检查 / try-catch（尤其在已验证路径）
+- 精简高效，仅做针对性实现
+
+
+pass1.py to mv all videos from ./**/*.mp4 to ./flatten_vid/*
+- depending on structure of dirs, assign or extract order number (ID as i/i.j./i.j.k) from folder and filename
+- create sort algo smartly to mv files
+- pass1 result example: i.title.mp4 or i.j.title.mp4 or i.j.k.title.mp4
+- user can append --revert to regret
+- first preview mv results, and run mv only if input Y/y
+
+pass2.py to concat videos:
+- output format R:/{getcwd().split("/")[-1]}_{sub_range}_{vid_spec}.mp4
+- sub_range is separated by commas for discrete and dash for continious, like: 1,5,6,8-10
+- sub_range in terms of multi-level ID, use a global List[Tuple(2|3)] as index, and find slices (like substring) to determine discrete/continious
+- ffprobe to get vid_spec WxHxFPS_vcodec_acodec, like 1920x1080x30_h264_aac
+- first try to use intermediate.ts file and concat protocol, use R:/ts/ as temp dir, and R:/ for final outputs, clean temp .ts after each concat
+- if concat protocol failed, fallback to contact remuxer
+- avoid transcode unless specified
+- create R:/{vid_output_basename}_timeline.txt, with remove strings of watermark/ads
+
+
+ffmpeg, ffprobe, python are ready to call. 
+
+
+Please note that h264_mp4toannexb only works for h264, and you cannot assume inputs are always h264.
+ensure follow the latest ffmpeg doc:
+
+---
+
+Concatenation of files with same codecs
+
+There are two methods within ffmpeg that can be used to concatenate files of the same type:
+
+    the concat ''demuxer''
+    the concat ''protocol'' 
+
+The demuxer is more flexible – it requires the same codecs, but different container formats can be used; and it can be used with any container formats, while the protocol only works with a select few containers.
+Concat demuxer
+
+You can read about the concat demuxer in the documentation. This demuxer reads a list of files and other directives from a text file and demuxes them one after the other, as if all their packets had been muxed together. All files must have the same streams (same codecs, same time base, etc.) but can be wrapped in different container formats.
+Instructions
+
+Create a file mylist.txt with all the files you want to have concatenated in the following form (lines starting with a # are ignored):
+
+# this is a comment
+file '/path/to/file1.wav'
+file '/path/to/file2.wav'
+file '/path/to/file3.wav'
+
+Note that these can be either relative or absolute paths. Then you can stream copy or re-encode your files:
+
+ffmpeg -f concat -safe 0 -i mylist.txt -c copy output.wav
+
+The -safe 0 above is not required if the paths are relative.
+Automatically generating the input file
+
+It is possible to generate this list file with a bash for loop, or using printf. Either of the following would generate a list file containing every *.wav in the working directory:
+
+# with a bash for loop
+for f in *.wav; do echo "file '$f'" >> mylist.txt; done
+# or with printf
+printf "file '%s'\n" *.wav > mylist.txt
+
+On Windows Command-line:
+
+(for %i in (*.wav) do @echo file '%i') > mylist.txt
+
+Or for Windows Powershell:
+
+foreach ($i in Get-ChildItem .\*.wav) {"file '$i'" | Out-File mylist.txt -Encoding utf8 -Append}
+
+Or for Windows bat-file:
+
+(for %%i in (*.wav) do @echo file '%%i') > mylist.txt
+
+If your shell supports process substitution (like Bash and Zsh), you can avoid explicitly creating a list file and do the whole thing in a single line. This would be impossible with the concat protocol (see below). Make sure to generate absolute paths here, since ffmpeg will resolve paths relative to the list file your shell may create in a directory such as "/proc/self/fd/". Further, this process will fail if file names contain a single quote (e.g. 's) and an actual file must be generated. (From docs: https://ffmpeg.org/ffmpeg-formats.html#concat-1 3.5.1 Syntax: special characters and spaces must be escaped with backslash or single quotes)
+
+From docs: https://ffmpeg.org/ffmpeg-formats.html#concat-1 3.5.1 Syntax The script is a text file in extended-ASCII, with one directive per line. Empty lines, leading spaces and lines starting with ’#’ are ignored. The following directive is recognized: file path Path to a file to read; special characters and spaces must be escaped with backslash or single quotes. All subsequent file-related directives apply to that file.
+
+ffmpeg -f concat -safe 0 -i <(for f in ./*.wav; do echo "file '$PWD/$f'"; done) -c copy output.wav
+ffmpeg -f concat -safe 0 -i <(printf "file '$PWD/%s'\n" ./*.wav) -c copy output.wav
+ffmpeg -f concat -safe 0 -i <(find . -name '*.wav' -printf "file '$PWD/%p'\n") -c copy output.wav
+
+You can also loop a video. This example will loop input.mkv 10 times:
+
+for i in {1..10}; do printf "file '%s'\n" input.mkv >> mylist.txt; done
+ffmpeg -f concat -i mylist.txt -c copy output.mkv
+
+Changing playlist files on the fly
+
+The concat demuxer opens the referenced files only when they are needed. This allows us to swap the referenced files atomically behind the demuxers back to be able to use the concat demuxer as a changeable live source. Check out the following example file list.txt:
+
+ffconcat version 1.0
+file dummy.mxf
+file dummy.mxf
+
+dummy.mxf is referenced twice to make sure the concat demuxer reopens the file when it reaches it. Combine this with infinite looping and you are done:
+
+ffmpeg -re -stream_loop -1 -f concat -i list.txt -flush_packets 0 -f mpegts udp://127.0.0.1:5000?pkt_size=1316
+
+Now you can change the looping clip by a simple move command:
+
+mv next_clip.mxf dummy.mxf
+
+Automatically appending to the list file
+
+Concatenation does not work if the next clip for does not exist at the moment, because decoding won't start until the whole list is read. However, it is possible to refer to another list at the end of the current list. The following script provides an example for this mechanism:
+
+#!/bin/bash
+
+fn_concat_init() {
+    echo "fn_concat_init"
+    concat_pls=`mktemp -u -p . concat.XXXXXXXXXX.txt`
+    concat_pls="${concat_pls#./}"
+    echo "concat_pls=${concat_pls:?}"
+    mkfifo "${concat_pls:?}"
+    echo
+}
+
+fn_concat_feed() {
+    echo "fn_concat_feed ${1:?}"
+    {
+        >&2 echo "removing ${concat_pls:?}"
+        rm "${concat_pls:?}"
+        concat_pls=
+        >&2 fn_concat_init
+        echo 'ffconcat version 1.0'
+        echo "file '${1:?}'"
+        echo "file '${concat_pls:?}'"
+    } >"${concat_pls:?}"
+    echo
+}
+
+fn_concat_end() {
+    echo "fn_concat_end"
+    {
+        >&2 echo "removing ${concat_pls:?}"
+        rm "${concat_pls:?}"
+        # not writing header.
+    } >"${concat_pls:?}"
+    echo
+}
+
+fn_concat_init
+
+echo "launching ffmpeg ... all.mkv"
+timeout 60s ffmpeg -y -re -loglevel warning -i "${concat_pls:?}" -pix_fmt yuv422p all.mkv &
+
+ffplaypid=$!
+
+echo "generating some test data..."
+i=0; for c in red yellow green blue; do
+    ffmpeg -loglevel warning -y -f lavfi -i testsrc=s=720x576:r=12:d=4 -pix_fmt yuv422p -vf "drawbox=w=50:h=w:t=w:c=${c:?}" test$i.mkv
+    fn_concat_feed test$i.mkv
+    ((i++));
+    echo
+done
+echo "done"
+
+fn_concat_end
+
+wait "${ffplaypid:?}"
+
+echo "done encoding all.mkv"
+
+Note that recursively referencing playlist files will cause ffmpeg to eventually run out of file descriptors (or other resources) because ffmpeg only closes the playlist file when the playlist has finished, but in the example above because of the recursive chaining none of the playlist files actually end.
+Concat protocol
+
+While the demuxer works at the stream level, the concat protocol works at the file level. Certain files (MPEG-2 transport streams, possibly others) can be concatenated. This can be used analogously to cat on UNIX-like systems or copy on Windows.
+Instructions
+
+The following command concatenates three MPEG-2 TS files without any media processing, and is analogous to using the cat command:
+
+ffmpeg -f data -i "concat:input1.ts|input2.ts|input3.ts" -map 0 -c copy -f data output.ts
+
+The following command presents three MPEG-2 TS files as a single conjoined input, and streamcopies the media streams to a new output file:
+
+ffmpeg -i "concat:input1.ts|input2.ts|input3.ts" -c copy output.ts
+
+Using intermediate files
+
+If you have MP4 files, these could be losslessly concatenated by first transcoding them to MPEG-2 transport streams. With H.264 video and AAC audio, the following can be used:
+
+ffmpeg -i input1.mp4 -c copy intermediate1.ts
+ffmpeg -i input2.mp4 -c copy intermediate2.ts
+ffmpeg -i "concat:intermediate1.ts|intermediate2.ts" -c copy output.mp4
+
+Using named pipes to avoid intermediate files
+
+If you're using a system that supports named pipes, you can use those to avoid creating intermediate files. This sends stderr (to which ffmpeg sends all the written data) to /dev/null, to avoid cluttering up the command-line:
+
+mkfifo temp1 temp2
+ffmpeg -y -i input1.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts temp1 2> /dev/null & \
+ffmpeg -y -i input2.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts temp2 2> /dev/null & \
+ffmpeg -f mpegts -i "concat:temp1|temp2" -c copy -bsf:a aac_adtstoasc output.mp4
+
+The additional -y switch is needed to force ffmpeg to write to existing files temp1 and temp2, which are the named pipes. Without the switch, the first two ffmpeg programs running in the background will not produce any output because they wait for interactive yes/no answers to the questions whether to overwrite existing files.
+
+All MPEG codecs (MPEG-4 Part 10 / AVC, MPEG-4 Part 2, MPEG-2 Video, MPEG-1 Audio Layer II, MPEG-2 Audio Layer III (MP3), MPEG-4 Part III (AAC)) are supported in the MPEG-TS container format, although the commands above would require some alteration (e.g., the -bsf bitstream filters will have to be changed). 
+
+---
+
+current dir/tree
+
+```cmd
+
+```
