@@ -12,6 +12,7 @@ Write an HTML SPA.
 4. Preferred ES6 features: arrow function, template literals
 5. Unfavored ES6 features: `const`: use `var` instead to avoid TDZ performance issue, unless inside for{}, if{}.
 6. You may define help functions like `var $=id=>document.getElementById(id);` for a small code size, if document.getElementById is used for multiple times.
+7. Single-letter vars only in tightest scope; else UNIX-style short names. If a var is used ≤1×, inline the expr instead of storing. Declare independent vars with comma chains.
 </CodeStyle>
 
 <Example>
@@ -68,6 +69,7 @@ Write an HTML SPA.
 4. Preferred ES6 features: arrow function, template literals
 5. Unfavored ES6 features: `const`: use `var` instead to avoid TDZ performance issue, unless inside for{}, if{}.
 6. You may define help functions like `var $=id=>document.getElementById(id);` for a small code size, if document.getElementById is used for multiple times.
+7. Single-letter vars only in tightest scope; else UNIX-style short names. If a var is used ≤1×, inline the expr instead of storing. Declare independent vars with comma chains.
 </CodeStyle>
 
 <Template>
